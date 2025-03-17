@@ -1,0 +1,365 @@
+/* Global */
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f9fb;
+    color: #333;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #e1e4e8;
+    justify-content: space-between; /* separate left and right */
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #36a3f7;
+    margin-right: 20px;
+  }
+  .set-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 40px;
+  }
+  #setSelector {
+    font-size: 14px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  #createSetBtn {
+    cursor: pointer;
+    background-color: #36a3f7;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 5px 10px;
+  }
+  .createSetBtn:hover {
+    background-color: #2a8cd6;
+  }
+  .main-tabs {
+    display: flex;
+    gap: 10px;
+  }
+  .main-tabs button {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s, border-bottom 0.3s;
+    color: #333;
+  }
+  .main-tabs button:hover {
+    color: #36a3f7;
+  }
+  .main-tabs button.active {
+    border-bottom: 2px solid #36a3f7;
+    color: #36a3f7;
+  }
+  main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+  }
+  .mode {
+    display: none;
+  }
+  .mode.active {
+    display: block;
+  }
+  
+  /* flashcards */
+  .card-container {
+    perspective: 1000px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  .card {
+    width: 500px;
+    height: 300px;
+    max-width: 90vw;
+    max-height: 70vh;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+  .card.flip {
+    transform: rotateY(180deg);
+  }
+  .card-side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    /* let text scroll if it's too long */
+    overflow-y: auto;
+    /* responsive font size from 16px up to 20px depending on viewport width */
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.4em;
+  }
+  .card .back {
+    transform: rotateY(180deg);
+  }
+  .buttons {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .buttons button {
+    background-color: #36a3f7;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .buttons button:hover {
+    background-color: #2a8cd6;
+  }
+
+  /* test mode */
+  .test-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+  }
+  .test-step {
+    text-align: center;
+  }
+  #testSetup h2 {
+    margin-top: 0;
+  }
+  #testSetup label {
+    display: block;
+    margin: 15px 0 5px 0;
+  }
+  #testSetup input {
+    width: 100px;
+    padding: 8px;
+    text-align: center;
+  }
+  #startTestBtn {
+    margin-left: 10px;
+    background-color: #36a3f7;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  #startTestBtn:hover {
+    background-color: #2a8cd6;
+  }
+  
+  .test-question {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .test-input {
+    margin-bottom: 20px;
+  }
+  .test-input input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .test-input button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #36a3f7;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .test-input button:hover {
+    background-color: #2a8cd6;
+  }
+  .test-score,
+  .test-result {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  #testComplete h2 {
+    margin-top: 0;
+  }
+  #testSummary {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 600px;
+    font-size: 15px;
+  }
+  #testSummary .summary-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  #testSummary .correct {
+    color: green;
+  }
+  #testSummary .incorrect {
+    color: red;
+  }
+  #restartTest {
+    background-color: #36a3f7;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  #restartTest:hover {
+    background-color: #2a8cd6;
+  }
+  
+  /* learn mode */
+  .learn-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  .learn-container h2 {
+    margin-top: 0;
+    color: #36a3f7;
+  }
+  .learn-question {
+    font-size: 20px;
+    margin-bottom: 20px;
+    min-height: 40px;
+  }
+  .learn-input {
+    margin-bottom: 20px;
+  }
+  .learn-input input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .learn-input button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #36a3f7;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .learn-input button:hover {
+    background-color: #2a8cd6;
+  }
+  #learnFeedback {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  /* add questions mode */
+  .add-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+  }
+  .add-container h2 {
+    margin-top: 0;
+    color: #36a3f7;
+  }
+  .set-management {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  #setNameInput {
+    flex: 1 1 auto;
+    padding: 8px;
+    font-size: 14px;
+  }
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .form-row input {
+    flex: 1 1 40%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .form-row button.deleteRow {
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  .add-container button {
+    background-color: #36a3f7;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  .add-container button:hover {
+    background-color: #2a8cd6;
+  }
+  #jsonText {
+    width: 100%;
+    font-family: monospace;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  .json-buttons {
+    margin-top: 10px;
+  }
+  .json-buttons button {
+    margin-right: 10px;
+  }
+  

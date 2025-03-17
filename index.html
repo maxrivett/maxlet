@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maxlet</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="title">Maxlet</div>
+    <div class="set-selector-container">
+      <label for="setSelector">Question Set:</label>
+      <select id="setSelector"></select>
+      <button id="createSetBtn">+</button>
+    </div>
+    <nav class="main-tabs">
+      <button id="flashcardsTab">Flashcards</button>
+      <button id="testTab">Test Mode</button>
+      <button id="learnTab">Learn</button>
+      <button id="addTab">Add Questions</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Flashcards Mode -->
+    <section id="flashcardsMode" class="mode">
+      <div class="card-container">
+        <div class="card" id="flashcard">
+          <div class="card-side front" id="cardFront"></div>
+          <div class="card-side back" id="cardBack"></div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button id="prevBtn" disabled>Previous</button>
+        <button id="shuffleBtn" disabled>Shuffle</button>
+        <button id="nextBtn" disabled>Next</button>
+      </div>
+    </section>
+
+    <!-- Test Mode -->
+    <section id="testMode" class="mode">
+      <div class="test-container">
+        <div id="testSetup" class="test-step">
+          <h2>Test Setup</h2>
+          <p>Number of questions available: <span id="totalQuestionsCount">0</span></p>
+          <label for="testCountInput">How many questions do you want to be tested on?</label>
+          <input type="number" id="testCountInput" min="1" value="1" />
+          <button id="startTestBtn" disabled>Start Test</button>
+        </div>
+
+        <!-- Test In-Progress -->
+        <div id="testInProgress" class="test-step" style="display: none;">
+          <div class="test-question" id="testQuestion"></div>
+          <div class="test-input">
+            <input type="text" id="answerInput" placeholder="Type your answer here">
+            <button id="submitAnswer" disabled>Submit</button>
+          </div>
+          <div class="test-score" id="testScore">Score: 0/0 (0%)</div>
+          <div class="test-result" id="testResult"></div>
+        </div>
+
+        <!-- Test Complete -->
+        <div id="testComplete" class="test-step" style="display: none;">
+          <h2>Test Complete!</h2>
+          <div id="finalScore"></div>
+          <div id="testSummary"></div>
+          <button id="restartTest">Restart Test</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learn Mode -->
+    <section id="learnMode" class="mode">
+      <div class="learn-container">
+        <h2>Learn Mode</h2>
+        <p id="learnStats"></p>
+
+        <div id="learnQuestion" class="learn-question"></div>
+        <div class="learn-input">
+          <input type="text" id="learnAnswerInput" placeholder="Type your answer here"/>
+          <button id="learnSubmitBtn" disabled>Submit</button>
+        </div>
+        <div id="learnFeedback"></div>
+
+        <button id="learnNextBtn" style="display: none;">Next Question</button>
+        <button id="resetLearnBtn" style="margin-top:20px;">Reset Learned Stats</button>
+      </div>
+    </section>
+
+    <!-- Add Questions Mode -->
+    <section id="addQuestionsMode" class="mode">
+      <div class="add-container">
+        <h2>Manage Question Set</h2>
+        <div class="set-management">
+          <label for="setNameInput">Set Name:</label>
+          <input type="text" id="setNameInput" placeholder="e.g. My New Set" />
+          <button id="renameSetBtn">Rename</button>
+          <button id="deleteSetBtn" style="margin-left: 10px;">Delete Set</button>
+        </div>
+
+        <hr style="margin: 30px 0;">
+
+        <h2>Add Your Questions</h2>
+        <div id="formList"></div>
+        <button id="addRowBtn">+ Add New Question</button>
+        <button id="saveFormBtn">Save Changes</button>
+
+        <hr style="margin: 30px 0;">
+
+        <h3>Advanced: Edit via JSON</h3>
+        <textarea id="jsonText" rows="8" placeholder="Paste or edit JSON here"></textarea>
+        <div class="json-buttons">
+          <button id="refreshJsonBtn">Refresh JSON</button>
+          <button id="importJsonBtn">Import from JSON</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/data.js"></script>
+  <script src="scripts/flashcards.js"></script>
+  <script src="scripts/test.js"></script>
+  <script src="scripts/learn.js"></script>
+  <script src="scripts/addQuestions.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
