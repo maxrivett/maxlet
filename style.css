@@ -23,6 +23,17 @@
     color: #36a3f7;
     margin-right: 20px;
   }
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    margin-right: 20px;
+  }
   .set-selector-container {
     display: flex;
     align-items: center;
@@ -363,3 +374,43 @@
     margin-right: 10px;
   }
   
+  /* Responsive Styles */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .set-selector-container {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  .main-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .main-tabs button {
+    flex: 1 1 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+  }
+  main {
+    padding: 10px;
+  }
+  .card {
+    width: 90vw;
+    height: auto;
+    min-height: 200px;
+  }
+  .buttons {
+    flex-direction: column;
+  }
+  .buttons button {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .test-container, .learn-container, .add-container {
+    width: 95vw;
+    padding: 10px;
+  }
+}
